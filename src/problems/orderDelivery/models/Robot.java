@@ -70,6 +70,17 @@ public class Robot implements Cloneable{
     public Object clone(){
         return new Robot(name, this.status, position, usedTime);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Robot r = (Robot) obj;
+        boolean sameName = r.getName().equals(this.getName());
+        boolean sameTime = r.getUsedTime() == this.getUsedTime();
+        boolean sameStatus = r.getStatus().equals(this.getStatus());
+        boolean samePosition = r.getPosition().equals(this.position);
+        return sameName && sameTime && sameStatus && samePosition; //To change body of generated methods, choose Tools | Templates.
+    }
+    
     
     
 }

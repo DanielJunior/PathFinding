@@ -39,7 +39,7 @@ public class Deliver implements Action {
     public State go(State state) {
         robot.setStatus(Status.ON_DELIVERY);
         robot.setPosition(station.getPosition());
-        robot.setUsedTime(robot.getUsedTime() + calculateUsedTime(robot.getPosition(), station.getPosition()));
+        robot.setUsedTime(robot.getUsedTime() + calculateUsedTime(robot.getPosition(), product.getPosition()) + calculateUsedTime(product.getPosition(), station.getPosition()));
         Order temp = state.getOrder(station, product);
         List<Order> orders = new ArrayList<>(state.getOrdersToDeliver());
         orders.remove(temp);
@@ -85,8 +85,8 @@ public class Deliver implements Action {
     }
 
     @Override
-    public Action clone(){
-        return new Deliver((Robot)robot.clone(), (Product)product.clone(), (Station)station.clone());
+    public Action clone() {
+        return new Deliver((Robot) robot.clone(), (Product) product.clone(), (Station) station.clone());
     }
-    
+
 }

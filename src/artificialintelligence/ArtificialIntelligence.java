@@ -46,13 +46,9 @@ public class ArtificialIntelligence {
         Product p3 = new Product("prod3", new Position(0, 20));
         products.add(p3);
 
-        List<Station> stations = new ArrayList<>();
         Station s1 = new Station("pack1", new Position(20, 0));
-        stations.add(s1);
         Station s2 = new Station("pack2", new Position(20, 10));
-        stations.add(s2);
         Station s3 = new Station("pack3", new Position(20, 20));
-        stations.add(s3);
 
         List<Order> orders = new ArrayList<>();
         orders.add(new Order("order1", p1, s1));
@@ -70,6 +66,10 @@ public class ArtificialIntelligence {
 
         AStar<State, Action> astar = new AStar();
         Solution resp = astar.search(problem, new AHeuristic());
-        resp.print();
+        if (resp != null) {
+            resp.print();
+        } else {
+            System.out.println("Solução não encontrada!");
+        }
     }
 }

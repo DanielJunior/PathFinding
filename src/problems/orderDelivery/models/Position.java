@@ -40,4 +40,10 @@ public class Position {
         return "(" + x + "," + y + ")";
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        Position p = (Position) obj;
+        return this.x == p.x && this.y == p.y;
+    }
+
 }

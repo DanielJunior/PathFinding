@@ -79,12 +79,22 @@ public class State {
     public String toString() {
         String robotToString = "";
         for (Robot r : robots) {
-            robotToString += r.toString() +"\n";
+            robotToString += r.toString() + "\n";
         }
         String ordersToString = "";
         for (Order o : ordersToDeliver) {
-            ordersToString += o.toString()+"";
+            ordersToString += o.toString() + "";
         }
-        return "Orders:" + ordersToString + "\n\nRobots:\n" + robotToString + "\nCurrentTime: " + getTime()+"\n";
+        return "Orders:" + ordersToString + "\n\nRobots:\n" + robotToString + "\nCurrentTime: " + getTime() + "\n";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        State s = (State) obj;
+        boolean sameTime = s.getTime() == this.getTime();
+        boolean sameRobots = robots.containsAll(s.getRobots());
+        boolean sameOrders = ordersToDeliver.containsAll(s.getOrdersToDeliver());
+        return sameOrders && sameRobots && sameTime; //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

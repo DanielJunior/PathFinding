@@ -29,7 +29,7 @@ public class Node<TState, TAction> {
 
     public Node childNode(Problem<TState, TAction> problem, Node parent, TAction action){
         State result = (State) problem.result((TState) parent.getState(), action);
-        int problemCost = problem.stepCost((TState) parent.state, action);
+        int problemCost = problem.stepCost((TState) parent.getState(), action);
         int cost = parent.pathCost + problemCost;
         return new Node(result, parent, action, cost);
     }

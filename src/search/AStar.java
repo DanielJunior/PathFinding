@@ -36,25 +36,31 @@ public class AStar<TState, TAction> {
             if (frontier.isEmpty()) {
                 return null;
             }
+            System.out.println("Frontier size: " + frontier.size());
             node = frontier.pop();
+            System.out.println("Actual explored node state: " + node.getState().toString());
+            if (node.getAction() != null) {
+                System.out.println("\nAction: "+node.getAction().toString());
+            }
+            System.out.println("\n**************************");
             if (problem.isFinal(node.getState())) {
                 return new Solution(node);
             }
-            if (newNode(node, exploredSet)) {
+            if (notIn(node, exploredSet)) {
                 exploredSet.add(node);
             }
             List<TAction> actions = problem.actions(node.getState());
             for (TAction action : actions) {
                 Node child = node.childNode(problem, node, action);
                 Node worse = existsAWorseNode(child, heuristic);
-                if (newNode(child, frontier) && newNode(child, exploredSet)) {
+                if (notIn(child, frontier) && notIn(child, exploredSet)) {
                     frontier.add(child);
                 } else if (worse != null) {
                     frontier.remove(worse);
                     frontier.add(child);
                 }
-                sortFrontier(heuristic);
             }
+            sortFrontier(heuristic);
         }
     }
 
@@ -71,24 +77,11 @@ public class AStar<TState, TAction> {
         Collections.sort(frontier, new NodeComparator(heuristic));
     }
 
-    private boolean newNode(Node<TState, TAction> node, List<Node> list) {
+    private boolean notIn(Node<TState, TAction> node, List<Node> list) {
         Node temp = (Node) node;
-        State aux = (State) temp.getState();
         for (Node n : list) {
             State s = (State) n.getState();
-            boolean sameOrders = s.getOrdersToDeliver().equals(aux.getOrdersToDeliver());
-            boolean sameParents;
-            if (aux.getParent() == null && s.getParent() == null) {
-                sameParents = true;
-            } else if ((aux.getParent() == null && s.getParent() != null) || (aux.getParent() != null && s.getParent() == null)) {
-                sameParents = false;
-            } else {
-                sameParents = s.getParent().equals(aux.getParent());
-            }
-            boolean sameRobots = s.getRobots().equals(aux.getRobots());
-            boolean sameTime = s.getTime() == aux.getTime();
-            boolean sameCost = node.getPathCost() == n.getPathCost();
-            if (sameCost && sameOrders && sameParents && sameRobots && sameTime) {
+            if (temp.getState().equals(s)) {
                 return false;
             }
         }

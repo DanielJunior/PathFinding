@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import problems.orderDelivery.models.Order;
+import problems.orderDelivery.models.Position;
 import problems.orderDelivery.models.Robot;
 import problems.orderDelivery.models.State;
 import problems.orderDelivery.models.Status;
@@ -40,13 +41,15 @@ public class MoveForward implements Action {
 
     @Override
     public State go(State parent) {
+        List<Robot> robots = new ArrayList<>();
         for (Robot r : parent.getRobots()) {
             if (r.getUsedTime() <= newTime) {
-                r.setStatus(Status.IDLE);
-                r.setUsedTime(newTime);
+                robots.add(new Robot(r.getName(), Status.IDLE, new Position(r.getPosition().getX(), r.getPosition().getY()), r.getUsedTime() + (newTime - r.getUsedTime())));
+            } else {
+                robots.add(new Robot(r.getName(), r.getStatus(), new Position(r.getPosition().getX(), r.getPosition().getY()), r.getUsedTime()));
             }
         }
-        State resp = new State(cloneRobotList(parent.getRobots()), cloneOrderList(parent.getOrdersToDeliver()), newTime);
+        State resp = new State(robots, cloneOrderList(parent.getOrdersToDeliver()), newTime);
         return resp;
     }
 
@@ -59,15 +62,15 @@ public class MoveForward implements Action {
         return "MoveForward => " + newTime;
     }
 
-    public static List<Robot> cloneRobotList(List<Robot> list){
+    public static List<Robot> cloneRobotList(List<Robot> list) {
         List<Robot> clone = new ArrayList<Robot>(list.size());
         for (Robot item : list) {
             clone.add((Robot) item.clone());
         }
         return clone;
     }
-    
-      public static List<Order> cloneOrderList(List<Order> list){
+
+    public static List<Order> cloneOrderList(List<Order> list) {
         List<Order> clone = new ArrayList<Order>(list.size());
         for (Order item : list) {
             try {
@@ -83,5 +86,5 @@ public class MoveForward implements Action {
     public Action clone() {
         return new MoveForward(newTime);
     }
-      
+
 }
