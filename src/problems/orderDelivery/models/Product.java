@@ -39,4 +39,11 @@ public class Product {
         return "Product: " + getName() + " - Position: " + getPosition().toString();
     }
 
+    @Override
+    public Object clone(){
+        return new Product(name,new Position(getPosition().getX(), getPosition().getY())); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+
 }

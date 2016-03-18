@@ -21,7 +21,7 @@ public abstract class GenericSearch<TState, TAction> {
     Collection<Node<TState, TAction>> frontier;
     Collection<Node> exploredSet;
 
-    public Node solution(Problem<TState, TAction> problem) {
+    public Node solution(Problem<TState, TAction> problem) throws CloneNotSupportedException {
         initializeFrontierAndExploredSet();
         addNodeToFrontier(new Node<>(problem.getInitialState(), null, null, 0));
         while (true) {

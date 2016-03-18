@@ -38,4 +38,10 @@ public class Station {
     public String toString() {
         return "Station: " + getName() + " - Position: " + getPosition().toString();
     }
+
+    @Override
+    public Object clone(){
+        return new Station(name, new Position(getPosition().getX(), getPosition().getY()));
+    }
+
 }

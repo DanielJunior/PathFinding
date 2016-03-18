@@ -9,7 +9,7 @@ package problems.orderDelivery.models;
  *
  * @author danieljunior
  */
-public class Order {
+public class Order implements Cloneable {
 
     private String name;
     private Product product;
@@ -46,6 +46,12 @@ public class Order {
     }
 
     public String toString() {
-        return "\n[ " + getName() + " - Product: " + getProduct().getName() + " - Station: " + getStationDeliver().getName()+" ]";
+        return "\n[ " + getName() + " - Product: " + getProduct().getName() + " - Station: " + getStationDeliver().getName() + " ]";
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return new Order(name, new Product(product.getName(), new Position(product.getPosition().getX(), product.getPosition().getY())), new Station(stationDeliver.getName(), new Position(stationDeliver.getPosition().getX(), stationDeliver.getPosition().getX())));
+    }
+
 }

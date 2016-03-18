@@ -27,11 +27,11 @@ public class Node<TState, TAction> {
         this.pathCost = pathCost;
     }
 
-    public Node childNode(Problem<TState, TAction> problem, Node parent, TAction action) {
-        State result = (State) problem.result((TState) parent.getState(),action);
-        int problemCost =  problem.stepCost((TState) parent.state, action);
-        int cost =  parent.pathCost + problemCost;
-        return new Node(result, parent, action,cost);
+    public Node childNode(Problem<TState, TAction> problem, Node parent, TAction action){
+        State result = (State) problem.result((TState) parent.getState(), action);
+        int problemCost = problem.stepCost((TState) parent.state, action);
+        int cost = parent.pathCost + problemCost;
+        return new Node(result, parent, action, cost);
     }
 
     public int getPathCost() {
@@ -65,7 +65,5 @@ public class Node<TState, TAction> {
     public void setAction(TAction action) {
         this.action = action;
     }
-    
-    
 
 }

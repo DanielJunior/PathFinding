@@ -6,6 +6,10 @@
 package problems.orderDelivery.search;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import problems.orderDelivery.models.Order;
 import problems.orderDelivery.models.Robot;
 import problems.orderDelivery.models.State;
 import problems.orderDelivery.models.Status;
@@ -42,7 +46,7 @@ public class MoveForward implements Action {
                 r.setUsedTime(newTime);
             }
         }
-        State resp = new State(new ArrayList<>(parent.getRobots()), new ArrayList<>(parent.getOrdersToDeliver()), newTime);
+        State resp = new State(cloneRobotList(parent.getRobots()), cloneOrderList(parent.getOrdersToDeliver()), newTime);
         return resp;
     }
 
@@ -52,6 +56,32 @@ public class MoveForward implements Action {
     }
 
     public String toString() {
-        return "MoveForward: " + newTime;
+        return "MoveForward => " + newTime;
     }
+
+    public static List<Robot> cloneRobotList(List<Robot> list){
+        List<Robot> clone = new ArrayList<Robot>(list.size());
+        for (Robot item : list) {
+            clone.add((Robot) item.clone());
+        }
+        return clone;
+    }
+    
+      public static List<Order> cloneOrderList(List<Order> list){
+        List<Order> clone = new ArrayList<Order>(list.size());
+        for (Order item : list) {
+            try {
+                clone.add((Order) item.clone());
+            } catch (CloneNotSupportedException ex) {
+                Logger.getLogger(MoveForward.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return clone;
+    }
+
+    @Override
+    public Action clone() {
+        return new MoveForward(newTime);
+    }
+      
 }

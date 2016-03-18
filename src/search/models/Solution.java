@@ -25,9 +25,9 @@ public class Solution {
         if (last == null) {
             return "";
         } else if (last.getParent() == null && last.getAction() == null) {
-            return "Node State:\n"+last.getState().toString()+"\nPathCost: "+last.getPathCost()+"\n\n";
+            return "Node State:\n"+last.getState().toString()+"\nPathCost: "+last.getPathCost()+"\n";
         } else {
-            return (auxPrint(last.getParent()) + "\n\nNode State:\n" + last.getState().toString() + "Action: " + last.getAction().toString() + "\nPathCost: " + last.getPathCost());
+            return (auxPrint(last.getParent()) + "\n***********************************************\n\nNode State:\n" + last.getState().toString() + "Action: " + last.getAction().toString() + "\nPathCost: " + last.getPathCost());
         }
     }
 }

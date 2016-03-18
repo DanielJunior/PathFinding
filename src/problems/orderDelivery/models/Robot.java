@@ -9,7 +9,7 @@ package problems.orderDelivery.models;
  *
  * @author danieljunior
  */
-public class Robot {
+public class Robot implements Cloneable{
 
     private String name;
     private Status status;
@@ -65,4 +65,11 @@ public class Robot {
     public String toString() {
         return "[ " + getName() + " - Status: " + getStatus() + " - Position: " + getPosition().toString() + " - NextTime: " + getUsedTime()+" ]";
     }
+
+    @Override
+    public Object clone(){
+        return new Robot(name, this.status, position, usedTime);
+    }
+    
+    
 }

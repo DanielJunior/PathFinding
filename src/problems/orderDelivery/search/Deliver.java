@@ -83,4 +83,10 @@ public class Deliver implements Action {
     public String toString() {
         return "[ " + robot.getName() + " - " + product.getName() + " - " + station.getName() + " ]";
     }
+
+    @Override
+    public Action clone(){
+        return new Deliver((Robot)robot.clone(), (Product)product.clone(), (Station)station.clone());
+    }
+    
 }
