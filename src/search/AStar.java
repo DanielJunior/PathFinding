@@ -9,12 +9,11 @@ import search.models.Heuristic;
 import search.models.Node;
 import search.models.NodeComparator;
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 import problems.orderDelivery.models.State;
 import search.models.Problem;
+import search.models.Solution;
 
 /**
  *
@@ -28,7 +27,7 @@ public class AStar<TState, TAction> {
     LinkedList<Node> frontier;
     LinkedList<Node> exploredSet;
 
-    public Node search(Problem<TState, TAction> problem, Heuristic<Node> heuristic) {
+    public Solution search(Problem<TState, TAction> problem, Heuristic<Node> heuristic) {
         Node<TState, TAction> node = new Node(problem.getInitialState(), null, null, 0);
         frontier = new LinkedList<>();
         frontier.add(node);
@@ -39,7 +38,7 @@ public class AStar<TState, TAction> {
             }
             node = frontier.pop();
             if (problem.isFinal(node.getState())) {
-                return node;
+                return new Solution(node);
             }
             if (newNode(node, exploredSet)) {
                 exploredSet.add(node);

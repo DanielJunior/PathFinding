@@ -35,4 +35,8 @@ public class Product {
         this.position = position;
     }
 
+    public String toString() {
+        return "Product: " + getName() + " - Position: " + getPosition().toString();
+    }
+
 }

@@ -45,4 +45,7 @@ public class Order {
         this.stationDeliver = stationDeliver;
     }
 
+    public String toString() {
+        return "\n[ " + getName() + " - Product: " + getProduct().getName() + " - Station: " + getStationDeliver().getName()+" ]";
+    }
 }

@@ -18,13 +18,16 @@ public class Solution {
     }
 
     public void print() {
-        auxPrint(last);
+        System.out.println(auxPrint(last));
     }
 
-    private void auxPrint(Node last) {
+    private String auxPrint(Node last) {
         if (last == null) {
-            return;
+            return "";
+        } else if (last.getParent() == null && last.getAction() == null) {
+            return "Node State:\n"+last.getState().toString()+"\nPathCost: "+last.getPathCost()+"\n\n";
+        } else {
+            return (auxPrint(last.getParent()) + "\n\nNode State:\n" + last.getState().toString() + "Action: " + last.getAction().toString() + "\nPathCost: " + last.getPathCost());
         }
-//        System.out.println(auxPrint(last)"");
     }
 }

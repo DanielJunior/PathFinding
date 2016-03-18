@@ -35,4 +35,7 @@ public class Station {
         this.position = position;
     }
 
+    public String toString() {
+        return "Station: " + getName() + " - Position: " + getPosition().toString();
+    }
 }

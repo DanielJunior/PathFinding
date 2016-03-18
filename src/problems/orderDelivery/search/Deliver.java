@@ -80,4 +80,7 @@ public class Deliver implements Action {
         this.station = station;
     }
 
+    public String toString() {
+        return "[ " + robot.getName() + " - " + product.getName() + " - " + station.getName() + " ]";
+    }
 }

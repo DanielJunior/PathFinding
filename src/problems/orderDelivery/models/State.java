@@ -79,12 +79,12 @@ public class State {
     public String toString() {
         String robotToString = "";
         for (Robot r : robots) {
-            robotToString += r.toString();
+            robotToString += r.toString() +"\n";
         }
         String ordersToString = "";
         for (Order o : ordersToDeliver) {
-            ordersToString += o.toString();
+            ordersToString += o.toString()+"";
         }
-        return "";
+        return "Orders:" + ordersToString + "\n\nRobots:\n" + robotToString + "\nCurrentTime: " + getTime()+"\n";
     }
 }

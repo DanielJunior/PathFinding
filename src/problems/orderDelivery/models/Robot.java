@@ -29,7 +29,6 @@ public class Robot {
         this.position = position;
         this.usedTime = usedTime;
     }
-    
 
     public String getName() {
         return name;
@@ -60,7 +59,10 @@ public class Robot {
     }
 
     public void setUsedTime(int usedTime) {
-        this.usedTime= usedTime;
+        this.usedTime = usedTime;
     }
 
+    public String toString() {
+        return "[ " + getName() + " - Status: " + getStatus() + " - Position: " + getPosition().toString() + " - NextTime: " + getUsedTime()+" ]";
+    }
 }

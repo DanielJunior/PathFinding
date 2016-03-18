@@ -20,8 +20,8 @@ import search.models.Action;
 import problems.orderDelivery.search.Deliver;
 import problems.orderDelivery.search.MoveForward;
 import search.AStar;
-import search.models.Node;
 import search.models.Problem;
+import search.models.Solution;
 
 /**
  *
@@ -69,7 +69,7 @@ public class ArtificialIntelligence {
         Problem problem = new OrderDeliveryProblem(actions, initialState, null);
 
         AStar<State, Action> astar = new AStar();
-        Node resp = astar.search(problem, new AHeuristic());
-        System.out.println(resp);
+        Solution resp = astar.search(problem, new AHeuristic());
+        resp.print();
     }
 }

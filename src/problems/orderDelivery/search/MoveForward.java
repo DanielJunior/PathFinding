@@ -51,4 +51,7 @@ public class MoveForward implements Action {
         return Math.abs(getNewTime() - parent.getTime());
     }
 
+    public String toString() {
+        return "MoveForward: " + newTime;
+    }
 }
