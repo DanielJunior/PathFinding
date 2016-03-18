@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package orderDelivery.models;
+package problems.orderDelivery.models;
 
 /**
  *
@@ -20,7 +20,16 @@ public class Robot {
         this.name = name;
         this.status = status;
         this.position = position;
+        this.usedTime = 0;
     }
+
+    public Robot(String name, Status status, Position position, int usedTime) {
+        this.name = name;
+        this.status = status;
+        this.position = position;
+        this.usedTime = usedTime;
+    }
+    
 
     public String getName() {
         return name;
@@ -51,7 +60,7 @@ public class Robot {
     }
 
     public void setUsedTime(int usedTime) {
-        this.usedTime = usedTime;
+        this.usedTime= usedTime;
     }
 
 }

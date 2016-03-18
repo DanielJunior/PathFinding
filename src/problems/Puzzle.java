@@ -5,6 +5,7 @@
  */
 package problems;
 
+import search.models.Problem;
 import java.util.ArrayList;
 import java.util.List;
 

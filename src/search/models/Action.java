@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package orderDelivery.models;
+package search.models;
+
+import problems.orderDelivery.models.State;
 
 /**
  *
  * @author danieljunior
  */
-public enum Status {
+public interface Action {
 
-    ON_DELIVER, IDLE
+    public State go(State state);
+    public int stepCost(State state);
 }

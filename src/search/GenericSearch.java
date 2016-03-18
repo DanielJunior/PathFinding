@@ -5,9 +5,10 @@
  */
 package search;
 
+import search.models.Node;
 import java.util.Collection;
 import java.util.List;
-import problems.Problem;
+import search.models.Problem;
 
 /**
  *

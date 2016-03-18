@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package search;
+package search.models;
 
-import problems.Problem;
+import problems.orderDelivery.models.State;
 
 /**
  *
@@ -28,7 +28,10 @@ public class Node<TState, TAction> {
     }
 
     public Node childNode(Problem<TState, TAction> problem, Node parent, TAction action) {
-        return new Node(problem.result((TState) parent.getState(), action), parent, action, parent.pathCost + problem.stepCost((TState) parent.state, action));
+        State result = (State) problem.result((TState) parent.getState(),action);
+        int problemCost =  problem.stepCost((TState) parent.state, action);
+        int cost =  parent.pathCost + problemCost;
+        return new Node(result, parent, action,cost);
     }
 
     public int getPathCost() {
@@ -62,5 +65,7 @@ public class Node<TState, TAction> {
     public void setAction(TAction action) {
         this.action = action;
     }
+    
+    
 
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package problems;
+package search.models;
 
 import java.util.List;
 
@@ -26,6 +26,10 @@ public abstract class Problem<TState, TAction> {
         currentState = initialState;
         this.solution = solution;
     }
+
+    public Problem() {
+    }
+    
 
     public abstract List<TAction> actions(TState state);
 

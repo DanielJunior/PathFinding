@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package orderDelivery.models;
+package problems.orderDelivery.models;
 
 /**
  *
  * @author danieljunior
  */
-public class Product {
+public class Station {
 
     private String name;
     private Position position;
 
-    public Product(String name, Position position) {
+    public Station(String name, Position position) {
         this.name = name;
         this.position = position;
     }
