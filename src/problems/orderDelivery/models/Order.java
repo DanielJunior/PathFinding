@@ -50,8 +50,8 @@ public class Order implements Cloneable {
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        return new Order(name, new Product(product.getName(), new Position(product.getPosition().getX(), product.getPosition().getY())), new Station(stationDeliver.getName(), new Position(stationDeliver.getPosition().getX(), stationDeliver.getPosition().getX())));
+    public Object clone(){
+        return new Order(name, new Product(product.getName(), new Position(product.getPosition().getX(), product.getPosition().getY())), new Station(stationDeliver.getName(), new Position(stationDeliver.getPosition().getX(), stationDeliver.getPosition().getY())));
     }
 
 }

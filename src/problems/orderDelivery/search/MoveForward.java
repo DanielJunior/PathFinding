@@ -44,7 +44,11 @@ public class MoveForward implements Action {
         List<Robot> robots = new ArrayList<>();
         for (Robot r : parent.getRobots()) {
             if (r.getUsedTime() <= newTime) {
-                robots.add(new Robot(r.getName(), Status.IDLE, new Position(r.getPosition().getX(), r.getPosition().getY()), r.getUsedTime() + (newTime - r.getUsedTime())));
+                int usedTime = r.getUsedTime() - newTime;
+                if (usedTime <= 0) {
+                    usedTime = 0;
+                }
+                robots.add(new Robot(r.getName(), Status.IDLE, new Position(r.getPosition().getX(), r.getPosition().getY()), usedTime));
             } else {
                 robots.add(new Robot(r.getName(), r.getStatus(), new Position(r.getPosition().getX(), r.getPosition().getY()), r.getUsedTime()));
             }
@@ -73,11 +77,8 @@ public class MoveForward implements Action {
     public static List<Order> cloneOrderList(List<Order> list) {
         List<Order> clone = new ArrayList<Order>(list.size());
         for (Order item : list) {
-            try {
-                clone.add((Order) item.clone());
-            } catch (CloneNotSupportedException ex) {
-                Logger.getLogger(MoveForward.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            clone.add((Order) item.clone());
+
         }
         return clone;
     }

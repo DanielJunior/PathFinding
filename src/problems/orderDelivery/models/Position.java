@@ -45,5 +45,8 @@ public class Position {
         Position p = (Position) obj;
         return this.x == p.x && this.y == p.y;
     }
+    public Object clone(){
+        return new Position(x, y);
+    }
 
 }

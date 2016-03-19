@@ -37,13 +37,28 @@ public class Deliver implements Action {
 
     @Override
     public State go(State state) {
-        robot.setStatus(Status.ON_DELIVERY);
-        robot.setPosition(station.getPosition());
-        robot.setUsedTime(robot.getUsedTime() + calculateUsedTime(robot.getPosition(), product.getPosition()) + calculateUsedTime(product.getPosition(), station.getPosition()));
-        Order temp = state.getOrder(station, product);
-        List<Order> orders = new ArrayList<>(state.getOrdersToDeliver());
-        orders.remove(temp);
-        return new State(new ArrayList<>(state.getRobots()), orders, state.getTime());
+        ArrayList<Robot> newRobots = new ArrayList<>();
+        Robot aux = null;
+        for (Robot r : state.getRobots()) {
+            Robot temp = (Robot) r.clone();
+            newRobots.add(temp);
+            if (r.equals(robot)) {
+                aux = temp;
+            }
+        }
+        aux.setStatus(Status.ON_DELIVERY);
+        int timeToGetProduct = calculateUsedTime(aux.getPosition(), product.getPosition());
+        int timeToGoToStation = calculateUsedTime(product.getPosition(), station.getPosition());
+        aux.setUsedTime(timeToGetProduct + timeToGoToStation);
+        aux.setPosition((Position) station.getPosition().clone());
+
+        ArrayList<Order> newOrders = new ArrayList<>();
+        for (Order o : state.getOrdersToDeliver()) {
+            if (!state.getOrder(station, product).equals(o)) {
+                newOrders.add(o);
+            }
+        }
+        return new State(newRobots, newOrders, state.getTime());
 
     }
 

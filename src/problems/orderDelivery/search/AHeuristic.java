@@ -18,9 +18,10 @@ public class AHeuristic implements Heuristic<Node> {
     @Override
     public double function(Node node) {
         State s = (State) node.getState();
-        int numberOfRobots = s.numberOfOnDeliveryRobots();
-//        return Math.sqrt(numberOfRobots);
-        return 0;
+        int numberOfDeliveryRobot = s.numberOfOnDeliveryRobots();
+        int numberOfIdleRobots = s.getRobots().size() - numberOfDeliveryRobot;
+        int numberOfOrdersToDelivery = s.getOrdersToDeliver().size();
+        return Math.sqrt(Math.pow(numberOfIdleRobots,2)+Math.pow(numberOfOrdersToDelivery,2));
     }
 
 }
